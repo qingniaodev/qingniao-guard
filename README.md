@@ -22,6 +22,8 @@ npx qingniao-guard src/content/blog
 npx qingniao-guard . --config guard.config.json --check domain,secret,pair --json
 ```
 
+**语言**：输出默认英文；环境变量 `LANG=zh*` 时自动输出中文；也可用 `--lang zh|en` 或 `QG_LANG=zh` 强制指定。
+
 退出码：`0`=全部通过　`1`=发现违规　`2`=用法/配置错误（可进 CI）。
 
 ## 检查项

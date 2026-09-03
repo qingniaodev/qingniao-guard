@@ -19,6 +19,8 @@ npx qingniao-guard src/content/blog                 # auto-finds guard.config.js
 npx qingniao-guard . --config guard.config.json --check domain,secret,pair --json
 ```
 
+**Language**: output defaults to English; set `LANG=zh*` to get Chinese automatically, or force it with `--lang zh|en` / `QG_LANG=zh`.
+
 Exit codes: `0`=all clear　`1`=violations found　`2`=usage/config error (CI-ready).
 
 ## Checks
