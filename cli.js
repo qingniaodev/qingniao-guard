@@ -493,6 +493,19 @@ async function main() {
   }
 }
 
-if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
+function isDirectRun() {
+  // 直接运行判定：兼容 `node cli.js` 与 npm 全局安装后的符号链接调用
+  // （bin 链接路径 ≠ 模块真实路径；须解析 realpath 再比较）。
+  if (!process.argv[1]) return false;
+  const raw = pathToFileURL(process.argv[1]).href;
+  if (import.meta.url === raw) return true;
+  try {
+    return import.meta.url === pathToFileURL(fs.realpathSync(process.argv[1])).href;
+  } catch {
+    return false;
+  }
+}
+
+if (isDirectRun()) {
   main();
 }

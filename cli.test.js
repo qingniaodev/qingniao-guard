@@ -265,6 +265,14 @@ test('CLI: 非法 --lang 报错退出码 2（stderr）', async () => {
   }
 });
 
+test('CLI: 通过符号链接调用（等价于 npm bin）输出版本', async () => {
+  const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'guard-link-'));
+  const link = path.join(tmp, 'qingniao-guard');
+  fs.symlinkSync(path.join(ROOT, 'cli.js'), link);
+  const { stdout } = await execFileP(process.execPath, [link, '--version'], { cwd: ROOT });
+  assert.match(stdout, /v1\.0\.0/);
+});
+
 test('CLI: 帮助包含用法', async () => {
   const { stdout } = await execFileP(process.execPath, ['cli.js', '--help'], { cwd: ROOT });
   assert.match(stdout, /qingniao-guard/);
