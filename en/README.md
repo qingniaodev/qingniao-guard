@@ -50,12 +50,17 @@ Secret hits report file, word and context. Words inside self-declarations like "
 - Default `defaultChecks` is `domain,secret` (`pair` only makes sense for bilingual layouts).
 - Secrets and patterns are **entirely yours** — the tool ships with no privacy vocabulary.
 
-## CI (GitHub Actions)
+## CI (GitHub Action)
 
 ```yaml
-- name: Content guard
-  run: npx qingniao-guard src/content --config guard.config.json --json
+- uses: qingniaodev/qingniao-guard@v1
+  with:
+    path: src/content          # directory to scan (repo root relative)
+    config: guard.config.json  # optional: config path (auto-detected when omitted)
+    # checks: domain,secret    # optional: overrides config defaultChecks
 ```
+
+Violations fail the build (exit 1). The repo dogfoods its own action via `uses: ./` against clean/leaky fixtures (see `action-smoke.yml`).
 
 ## Limitations (honest)
 

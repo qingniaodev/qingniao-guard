@@ -1,0 +1,32 @@
+name: action-smoke
+
+# Self-test: run the composite action (path-based `uses: ./`) against known
+# fixtures. The "clean" job must pass; the "leaky" job is expected to fail
+# (continue-on-error keeps the workflow green) — it proves the action fails CI
+# on violations, which is its whole point.
+on:
+  push:
+  pull_request:
+
+jobs:
+  clean-pass:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Guard clean fixture (should pass)
+        uses: ./
+        with:
+          path: test/fixtures/clean
+          config: .github/guard-smoke.config.json
+
+  leaky-detects:
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    steps:
+      - uses: actions/checkout@v4
+      - name: Guard leaky fixture (should fail — expected)
+        id: guard
+        uses: ./
+        with:
+          path: test/fixtures/leaky
+          config: .github/guard-smoke.config.json

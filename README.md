@@ -53,12 +53,17 @@ npx qingniao-guard . --config guard.config.json --check domain,secret,pair --jso
 - `defaultChecks` 缺省为 `domain,secret`（`pair` 只在有双语约定的目录开启，避免单一语言目录误报）。
 - 敏感词/正则**完全由你提供**——工具不预设任何隐私词。
 
-## 进 CI（GitHub Actions 示例）
+## 进 CI（GitHub Action）
 
 ```yaml
-- name: Content guard
-  run: npx qingniao-guard src/content --config guard.config.json --json
+- uses: qingniaodev/qingniao-guard@v1
+  with:
+    path: src/content          # 要检查的目录（相对仓库根）
+    config: guard.config.json  # 可选：配置路径（缺省自动找）
+    # checks: domain,secret    # 可选：覆盖 defaultChecks
 ```
+
+发现违规时构建失败（exit 1）；也可当 GitHub Action 自检的范例——本仓库用 `uses: ./` 对干净/泄露夹具各跑一遍（见 `action-smoke.yml`）。
 
 ## 局限（诚实声明）
 

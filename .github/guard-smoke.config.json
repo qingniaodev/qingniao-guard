@@ -1,0 +1,6 @@
+{
+  "allowedDomains": ["example.com"],
+  "blockedDomains": [],
+  "secrets": [],
+  "defaultChecks": ["domain", "secret"]
+}
