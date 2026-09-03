@@ -37,4 +37,4 @@ runs:
         ARGS=()
         if [ -n "${{ inputs.config }}" ]; then ARGS+=(--config "${{ inputs.config }}"); fi
         if [ -n "${{ inputs.checks }}" ]; then ARGS+=(--check "${{ inputs.checks }}"); fi
-        npx --yes github:qingniaodev/qingniao-guard@v1 "${{ inputs.path }}" "${ARGS[@]}" --lang "${{ inputs.lang }}" --json
+        node "${{ github.action_path }}/cli.js" "${{ inputs.path }}" "${ARGS[@]}" --lang "${{ inputs.lang }}" --json
