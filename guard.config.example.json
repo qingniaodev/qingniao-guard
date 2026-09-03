@@ -1,0 +1,8 @@
+{
+  "allowedDomains": ["example.com"],
+  "blockedDomains": [],
+  "secrets": ["TODO", "CHANGEME", "internal-only"],
+  "secretPatterns": ["\\bTOKEN_[A-Z0-9_]+\\b"],
+  "ignore": [".git", "node_modules", "dist"],
+  "defaultChecks": ["domain", "secret"]
+}

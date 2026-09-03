@@ -1,0 +1,14 @@
+{
+  "name": "qingniao-guard",
+  "version": "1.0.0",
+  "description": "Pre-publish content guard for markdown: domain allowlist/blocklist, sensitive words & patterns, zh/en pairing. Zero-dependency Node CLI.",
+  "type": "module",
+  "bin": { "qingniao-guard": "./cli.js" },
+  "files": ["cli.js", "README.md", "README.en.md", "LICENSE", "guard.config.example.json"],
+  "engines": { "node": ">=18" },
+  "scripts": { "test": "node --test" },
+  "keywords": ["markdown", "cli", "linter", "content", "guard", "privacy", "security", "bilingual", "publishing"],
+  "license": "MIT",
+  "author": "Qingniao <hi@qingniao.dev> (https://qingniao.dev)",
+  "repository": { "type": "git", "url": "git+https://github.com/qingniaodev/qingniao-guard.git" }
+}
